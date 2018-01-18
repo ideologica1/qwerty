@@ -1,0 +1,37 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+        "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+
+      xmlns:p="http://primefaces.org/ui"
+      xmlns:f="http://xmlns.jcp.org/jsf/core">
+<f:view>
+    <h:head>
+        <link rel="shortcut icon" href="../resources/images/favicon.ico/"/>
+        <title>
+            Results
+        </title>
+        <h:outputStylesheet name="css/style.css"/>
+    </h:head>
+    <h:form>
+        <p:growl id="msg"/>
+        <p:panel id="basic" header="Результаты" footer="ООО &#34;Сиблион&#34;" style="margin-bottom:20px">
+            <p:dataTable var="results" value="#{clientSideController.searchInfoResult.resultLogsList}">
+                <p:column headerText="Дата" width="15%">
+                    <h:outputText value="#{results.timeMoment}" />
+                </p:column>
+
+                <p:column headerText="Название файла" width="15%">
+                    <h:outputText value="#{results.fileName}" />
+                </p:column>
+
+                <p:column headerText="Содержание">
+                    <h:outputText value="#{results.content}" />
+                </p:column>
+            </p:dataTable>
+        </p:panel>
+    </h:form>
+</f:view>
+</html>
