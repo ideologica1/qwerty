@@ -33,7 +33,7 @@
                 <p/>
                 <p:outputLabel value="Введите регулярное выражение:" />
                 <h:panelGrid columns="2" style="margin-bottom:10px" cellpadding="5" styleClass="data-input">
-                    <p:inputText value="#{searchInfo.regularExpression}" id="Regex" size="30"
+                    <p:inputText value="#{client.searchInfo.regularExpression}" id="Regex" size="30"
                                   style="#{colorSwitcher.inverseFieldTextStyle}; #{colorSwitcher.fieldStyle}"/>
                     <p:watermark for="Regex" value="Регулярное выражение" id="watermark3"/>
                 </h:panelGrid>
@@ -77,19 +77,19 @@
                 <p/>
                 <p:outputLabel value="Выберите расположение логов:"/>
                 <h:panelGrid columns="2" style="margin-bottom:10px" cellpadding="5" styleClass="data-input">
-                    <p:inputText value="#{searchInfo.location}" id="location" size="45" style="#{colorSwitcher.fieldStyle}; #{colorSwitcher.inverseFieldTextStyle}"/>
+                    <p:inputText value="#{client.searchInfo.location}" id="location" size="45" style="#{colorSwitcher.fieldStyle}; #{colorSwitcher.inverseFieldTextStyle}"/>
                     <p:watermark for="location" value="Название домена, кластера или сервера" id="watermark4"/>
                 </h:panelGrid>
                 <p/>
                 <p:outputLabel value="Сохранять ли найденные логи в асинхронном режиме:"/>
                 <h:panelGrid columns="2" style="margin-bottom:10px" cellpadding="5">
                     <p:outputLabel value="Ассинхронный режим: "/>
-                    <p:inputSwitch value="#{searchInfo.realization}" style="#{colorSwitcher.fieldStyle}; #{colorSwitcher.inverseFieldTextStyle}"/>
+                    <p:inputSwitch value="#{client.searchInfo.realization}" style="#{colorSwitcher.fieldStyle}; #{colorSwitcher.inverseFieldTextStyle}"/>
                 </h:panelGrid>
                 <p/>
                 <p:outputLabel value="Выберите расширение запрошенного файла:"/>
                 <h:panelGrid columns="2" style="margin-bottom:10px" cellpadding="5">
-                    <p:selectOneMenu id="console" value="#{searchInfo.fileExtention}" style="#{colorSwitcher.fieldStyle}; #{colorSwitcher.inverseFieldTextStyle}; width:125px; ">
+                    <p:selectOneMenu id="console" value="#{client.searchInfo.fileExtention}" style="#{colorSwitcher.fieldStyle}; #{colorSwitcher.inverseFieldTextStyle}; width:125px; ">
                         <f:selectItem itemLabel="" itemValue=""/>
                         <f:selectItem itemLabel="XML" itemValue="XML"/>
                         <f:selectItem itemLabel="PDF" itemValue="PDF"/>
@@ -99,7 +99,7 @@
                         <f:selectItem itemLabel="DOC" itemValue="DOC"/>
                     </p:selectOneMenu>
                     <p:commandButton value="Поиск" ajax="false" id="nonAjax"
-                                     action="#{clientSideController.getResponse}" icon="ui-icon-check"/>
+                                     action="#{client.getResponse}" icon="ui-icon-check"/>
                 </h:panelGrid>
                 <p:messages id="msgs"/>
 

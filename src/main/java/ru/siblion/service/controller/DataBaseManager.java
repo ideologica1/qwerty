@@ -16,7 +16,7 @@ import java.util.List;
 
 public class DataBaseManager implements Serializable {
 
-    @Resource(name = "mydb")
+    @Resource(name = "LogsFinderDB")
     private DataSource dataSource;
 
     private Connection connection;

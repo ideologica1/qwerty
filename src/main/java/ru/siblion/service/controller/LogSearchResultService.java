@@ -1,8 +1,8 @@
 package ru.siblion.service.controller;
 
+import ru.siblion.client.soap.LogSearchResult;
 import ru.siblion.service.model.response.CorrectionCheckResult;
 import ru.siblion.service.util.Errors;
-import ru.siblion.service.model.response.LogSearchResult;
 
 import javax.inject.Inject;
 
