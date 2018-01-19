@@ -3,6 +3,10 @@ package ru.siblion.service.model.request;
 
 import javax.enterprise.context.RequestScoped;
 import javax.inject.Named;
+import javax.xml.bind.annotation.XmlAccessType;
+import javax.xml.bind.annotation.XmlAccessorType;
+import javax.xml.bind.annotation.XmlElement;
+import javax.xml.bind.annotation.XmlTransient;
 import java.text.DateFormat;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
@@ -40,6 +44,7 @@ public class SignificantDateInterval {
         return dateTo;
     }
 
+
     public void setDateTo(String dateTo) throws ParseException {
         SimpleDateFormat simpleDateFormat = new SimpleDateFormat("dd-MM-yyyy HH:mm:ss");
         this.dateTo = simpleDateFormat.parse(dateTo);
@@ -60,7 +65,7 @@ public class SignificantDateInterval {
             this.dateFromString = df.format(new Date(0L));
         }
         else
-        this.dateFromString = dateFromString;
+            this.dateFromString = dateFromString;
     }
 
     public String getDateToString() {
@@ -73,7 +78,7 @@ public class SignificantDateInterval {
             this.dateToString = df.format(new Date());
         }
         else
-        this.dateToString = dateToString;
+            this.dateToString = dateToString;
     }
 
     @Override

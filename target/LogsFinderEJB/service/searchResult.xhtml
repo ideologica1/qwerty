@@ -18,7 +18,7 @@
     <h:form>
         <p:growl id="msg"/>
         <p:panel id="basic" header="Результаты" footer="ООО &#34;Сиблион&#34;" style="margin-bottom:20px">
-            <p:dataTable var="results" value="#{clientSideController.searchInfoResult.resultLogsList}">
+            <p:dataTable var="results" value="#{client.searchInfoResult.resultLogsList}">
                 <p:column headerText="Дата" width="15%">
                     <h:outputText value="#{results.timeMoment}" />
                 </p:column>

@@ -41,7 +41,7 @@ public class ResultLogs {
         Content = content;
     }
 
-    @XmlElement(name = "timeMoment")
+    @XmlElement(name = "TimeMoment")
     public String getDateStringRepr() {
         DateFormat df = new SimpleDateFormat("dd-MM-yyyy HH:mm:ss");
         String reportDate = df.format(timeMoment);

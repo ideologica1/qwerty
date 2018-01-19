@@ -51,7 +51,7 @@
                 </tr>
                 <xsl:for-each select="searchInfoResult/resultLogsList">
                     <tr>
-                        <td><xsl:value-of select="timeMoment"/></td>
+                        <td><xsl:value-of select="TimeMoment"/></td>
                         <td><xsl:value-of select="FileName"/></td>
                         <td><xsl:value-of select="Content"/></td>
                     </tr>

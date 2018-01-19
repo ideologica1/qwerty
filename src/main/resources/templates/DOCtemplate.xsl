@@ -91,7 +91,7 @@
         <fo:table-row>
             <fo:table-cell  border="1px solid black">
                 <fo:block  font-size="10pt">
-                    <xsl:value-of select="timeMoment"/>
+                    <xsl:value-of select="TimeMoment"/>
                 </fo:block>
             </fo:table-cell>
             <fo:table-cell  border="1px solid black">

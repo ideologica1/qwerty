@@ -1,7 +1,9 @@
 package ru.siblion.service.controller;
 
-import ru.siblion.service.model.request.SearchInfo;
-import ru.siblion.service.model.request.SignificantDateInterval;
+
+
+import ru.siblion.client.soap.SearchInfo;
+import ru.siblion.client.soap.SignificantDateInterval;
 
 import javax.annotation.PostConstruct;
 import javax.enterprise.context.SessionScoped;
