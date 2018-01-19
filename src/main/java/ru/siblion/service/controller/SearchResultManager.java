@@ -9,7 +9,7 @@ import ru.siblion.service.model.response.LogSearchResult;
 import ru.siblion.service.model.response.ResultLogs;
 import ru.siblion.service.model.request.SearchInfo;
 import ru.siblion.service.model.response.SearchInfoResult;
-import ru.siblion.service.util.LogsComparator;
+import ru.siblion.util.LogsComparator;
 
 import javax.enterprise.context.RequestScoped;
 import javax.enterprise.inject.Produces;
@@ -42,7 +42,7 @@ public class SearchResultManager implements Serializable{
 
         //загрузка регулярного выражения из .properties для фильтрования файлов логов в папке
         String location = searchInfo.getLocation();
-        PropertiesConfiguration conf = new PropertiesConfiguration("C:/Users/ideyniy/IdeaProjects/FileSeracher/src/main/resources/application.properties");
+        PropertiesConfiguration conf = new PropertiesConfiguration("C:/Java/LogsFinderEJB/src/main/resources/application.properties");
         //лист содержащий абсолютные пути к выбранным серверам
         String[] serversList = conf.getStringArray(location);
         ResultLogs resultLogs = new ResultLogs();

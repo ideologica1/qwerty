@@ -1,10 +1,16 @@
 package ru.siblion.client.view;
 
+
+import org.apache.log4j.Logger;
+
 import javax.annotation.PostConstruct;
+import javax.ejb.Stateful;
 import javax.enterprise.context.SessionScoped;
 import javax.faces.application.FacesMessage;
 import javax.faces.context.FacesContext;
 import javax.inject.Named;
+import javax.interceptor.Interceptor;
+import javax.interceptor.Interceptors;
 import java.awt.*;
 import java.io.Serializable;
 import java.util.ArrayList;
@@ -24,6 +30,7 @@ public class ColorSwitcher implements Serializable{
 
     private List<String> allowedColors;
 
+    Logger logger = Logger.getLogger(ColorSwitcher.class);
     @PostConstruct
     private void init() {
 
@@ -48,6 +55,7 @@ public class ColorSwitcher implements Serializable{
     }
 
     public void setBackgroundColor(String backgroundColor) {
+        logger.info("switched background color to " + backgroundColor);
         if (isColorAllowed(backgroundColor)) {
             this.backgroundStyle = "background-color: " + backgroundColor;
             String fieldColor = generateFieldColor(backgroundColor);

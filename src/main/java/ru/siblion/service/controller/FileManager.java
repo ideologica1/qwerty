@@ -7,7 +7,7 @@ import org.xml.sax.SAXException;
 import ru.siblion.service.model.request.SearchInfo;
 import ru.siblion.service.model.request.SignificantDateInterval;
 import ru.siblion.service.model.response.CorrectionCheckResult;
-import ru.siblion.service.util.XMLModel;
+import ru.siblion.util.XMLModel;
 
 import javax.enterprise.context.RequestScoped;
 import javax.inject.Inject;
@@ -85,7 +85,7 @@ public class FileManager implements Serializable {
 
     private ByteArrayOutputStream getXMLasStream(XMLModel xmlModel) throws JAXBException {
 
-        JAXBContext context = JAXBContext.newInstance(ru.siblion.service.util.XMLModel.class);
+        JAXBContext context = JAXBContext.newInstance(ru.siblion.util.XMLModel.class);
         ByteArrayOutputStream out = new ByteArrayOutputStream();
         Marshaller marshaller = context.createMarshaller();
         marshaller.setProperty(Marshaller.JAXB_FORMATTED_OUTPUT, true);
@@ -96,7 +96,7 @@ public class FileManager implements Serializable {
 
     private void generateXML(String filePath, XMLModel xmlModel) throws JAXBException, ConfigurationException {
 
-        JAXBContext context = JAXBContext.newInstance(ru.siblion.service.util.XMLModel.class);
+        JAXBContext context = JAXBContext.newInstance(ru.siblion.util.XMLModel.class);
         Marshaller marshaller = context.createMarshaller();
         marshaller.setProperty(Marshaller.JAXB_FORMATTED_OUTPUT, true);
         File file = new File(filePath);

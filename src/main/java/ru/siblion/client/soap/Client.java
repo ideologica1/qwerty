@@ -32,6 +32,8 @@ public class Client {
   @Inject
   private ClientInputDataChecker clientInputDataChecker;
 
+
+  @Inject
   private SearchInfoResult searchInfoResult;
 
   public String getResponse() throws ConfigurationException, ConfigurationException_Exception, IOException_Exception, JAXBException_Exception, SQLException_Exception, TransformerException_Exception, ParseException_Exception, SAXException_Exception {

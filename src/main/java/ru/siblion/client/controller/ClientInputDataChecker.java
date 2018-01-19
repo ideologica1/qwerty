@@ -8,8 +8,8 @@ import ru.siblion.client.soap.SearchInfo;
 import ru.siblion.client.soap.SignificantDateInterval;
 import ru.siblion.service.controller.LogSearchResultService;
 import ru.siblion.service.model.response.CorrectionCheckResult;
-import ru.siblion.service.util.Errors;
-import ru.siblion.service.util.ErrorsComparator;
+import ru.siblion.util.Errors;
+import ru.siblion.util.ErrorsComparator;
 
 import javax.inject.Inject;
 import java.text.DateFormat;

@@ -40,6 +40,7 @@ public class ResultLogs {
     protected String fileName;
     @XmlElement(name = "Content")
     protected String content;
+    @XmlElement(name = "TimeMoment")
     protected String timeMoment;
 
     /**
