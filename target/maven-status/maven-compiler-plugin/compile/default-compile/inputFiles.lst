@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 C:\Java\LogsFinderEJB\src\main\java\ru\siblion\client\soap\SAXException.java
 C:\Java\LogsFinderEJB\src\main\java\ru\siblion\service\util\FileExtention.java
 C:\Java\LogsFinderEJB\src\main\java\ru\siblion\service\controller\LogSearchResultService.java
@@ -51,3 +52,31 @@ C:\Java\LogsFinderEJB\src\main\java\ru\siblion\service\controller\OutdatedFilesC
 C:\Java\LogsFinderEJB\src\main\java\ru\siblion\client\soap\IOException.java
 C:\Java\LogsFinderEJB\src\main\java\ru\siblion\client\soap\JAXBException.java
 C:\Java\LogsFinderEJB\src\main\java\ru\siblion\service\controller\LogSearchWS.java
+=======
+C:\Users\ideyniy\IdeaProjects\FileSeracher\src\main\java\ru\siblion\service\controller\DataBaseManager.java
+C:\Users\ideyniy\IdeaProjects\FileSeracher\src\main\java\ru\siblion\CurrentList.java
+C:\Users\ideyniy\IdeaProjects\FileSeracher\src\main\java\ru\siblion\service\controller\LogSearchWS.java
+C:\Users\ideyniy\IdeaProjects\FileSeracher\src\main\java\ru\siblion\service\model\response\SearchInfoResult.java
+C:\Users\ideyniy\IdeaProjects\FileSeracher\src\main\java\ru\siblion\service\model\response\CorrectionCheckResult.java
+C:\Users\ideyniy\IdeaProjects\FileSeracher\src\main\java\ru\siblion\service\util\FileExtention.java
+C:\Users\ideyniy\IdeaProjects\FileSeracher\src\main\java\ru\siblion\service\model\response\LogSearchResult.java
+C:\Users\ideyniy\IdeaProjects\FileSeracher\src\main\java\ru\siblion\service\controller\SearchResultManager.java
+C:\Users\ideyniy\IdeaProjects\FileSeracher\src\main\java\ru\siblion\service\model\request\SearchInfo.java
+C:\Users\ideyniy\IdeaProjects\FileSeracher\src\main\java\ru\siblion\service\util\Errors.java
+C:\Users\ideyniy\IdeaProjects\FileSeracher\src\main\java\ru\siblion\client\view\ResultRepresentation.java
+C:\Users\ideyniy\IdeaProjects\FileSeracher\src\main\java\ru\siblion\client\view\ColorSwitcher.java
+C:\Users\ideyniy\IdeaProjects\FileSeracher\src\main\java\ru\siblion\service\model\response\ResultLogs.java
+C:\Users\ideyniy\IdeaProjects\FileSeracher\src\main\java\ru\siblion\client\controller\InputDataChecker.java
+C:\Users\ideyniy\IdeaProjects\FileSeracher\src\main\java\ru\siblion\service\controller\SearchInfoService.java
+C:\Users\ideyniy\IdeaProjects\FileSeracher\src\main\java\ru\siblion\service\soap\LogSearchWS.java
+C:\Users\ideyniy\IdeaProjects\FileSeracher\src\main\java\ru\siblion\service\util\XMLModel.java
+C:\Users\ideyniy\IdeaProjects\FileSeracher\src\main\java\ru\siblion\service\model\request\SignificantDateInterval.java
+C:\Users\ideyniy\IdeaProjects\FileSeracher\src\main\java\ru\siblion\service\util\LogoutBean.java
+C:\Users\ideyniy\IdeaProjects\FileSeracher\src\main\java\ru\siblion\service\controller\OutdatedFilesCleaner.java
+C:\Users\ideyniy\IdeaProjects\FileSeracher\src\main\java\ru\siblion\service\util\LogsComparator.java
+C:\Users\ideyniy\IdeaProjects\FileSeracher\src\main\java\ru\siblion\client\ClientSideController.java
+C:\Users\ideyniy\IdeaProjects\FileSeracher\src\main\java\ru\siblion\service\controller\LogSearchResultService.java
+C:\Users\ideyniy\IdeaProjects\FileSeracher\src\main\java\ru\siblion\service\controller\FileManager.java
+C:\Users\ideyniy\IdeaProjects\FileSeracher\src\main\java\ru\siblion\service\soap\LogSearchWSService.java
+C:\Users\ideyniy\IdeaProjects\FileSeracher\src\main\java\ru\siblion\service\util\ErrorsComparator.java
+>>>>>>> 1d4c21fe545fd17af53c52960e92602afd94b08c

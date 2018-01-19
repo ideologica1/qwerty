@@ -1,7 +1,14 @@
 
 package ru.siblion.client.soap;
 
+<<<<<<< HEAD
 import javax.xml.bind.annotation.*;
+=======
+import javax.xml.bind.annotation.XmlAccessType;
+import javax.xml.bind.annotation.XmlAccessorType;
+import javax.xml.bind.annotation.XmlSchemaType;
+import javax.xml.bind.annotation.XmlType;
+>>>>>>> 1d4c21fe545fd17af53c52960e92602afd94b08c
 import javax.xml.datatype.XMLGregorianCalendar;
 import java.text.DateFormat;
 import java.text.SimpleDateFormat;

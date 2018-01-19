@@ -9,6 +9,10 @@ ru\siblion\client\soap\package-info.class
 ru\siblion\client\soap\LogSearchAsyncResponse.class
 ru\siblion\client\soap\ConfigurationException.class
 ru\siblion\service\controller\SearchResultManager.class
+<<<<<<< HEAD
+=======
+ru\siblion\client\controller\InputDataChecker.class
+>>>>>>> 1d4c21fe545fd17af53c52960e92602afd94b08c
 ru\siblion\client\soap\TransformerException.class
 ru\siblion\client\soap\ObjectFactory.class
 ru\siblion\client\soap\SearchInfoResult.class
