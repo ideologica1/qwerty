@@ -39,18 +39,14 @@ public class SearchResultManager implements Serializable{
     @CurrentList
     public SearchInfoResult searchLogs(SearchInfo searchInfo) throws ConfigurationException, IOException {
         searchInfoResult = new SearchInfoResult();
-
-        //загрузка регулярного выражения из .properties для фильтрования файлов логов в папке
         String location = searchInfo.getLocation();
         PropertiesConfiguration conf = new PropertiesConfiguration("C:/Java/LogsFinderEJB/src/main/resources/application.properties");
-        //лист содержащий абсолютные пути к выбранным серверам
         String[] serversList = conf.getStringArray(location);
-        ResultLogs resultLogs = new ResultLogs();
+        ResultLogs resultLogs;
         String excludedFiles = conf.getString("excludedFilesRegEx");
-        List<String> initialStringList = new ArrayList<>();
-        List<String> correctStringList = new ArrayList<>();
+        List<String> correctLogsList = new ArrayList<>();
         StringBuilder tempBuilder = new StringBuilder();
-        String temp;
+        String writtenLog;
         Pattern excludedLogs = Pattern.compile(excludedFiles);
         if (correctionCheckResult.getErrorCode() != 0) {
             searchInfoResult.setErrorCode(correctionCheckResult.getErrorCode());
@@ -72,18 +68,18 @@ public class SearchResultManager implements Serializable{
                                     tempBuilder.append(line).append("\n");
                                 } else {
                                     tempBuilder.append(line).append("\n");
-                                    temp = tempBuilder.toString();
+                                    writtenLog = tempBuilder.toString();
                                     tempBuilder = new StringBuilder();
-                                    if (isStringValid(temp, searchInfo)) {
-                                        correctStringList.add(temp);
+                                    if (isStringValid(writtenLog, searchInfo)) {
+                                        correctLogsList.add(writtenLog);
                                     }
                                 }
                             }
 
 
                             // установка значений resultLogs и добавление в лист логов
-                            for (int k = 0; k < correctStringList.size(); k++) {
-                                String[] splittedString = correctStringList.get(k).split("> <");
+                            for (int k = 0; k < correctLogsList.size(); k++) {
+                                String[] splittedString = correctLogsList.get(k).split("> <");
                                 String content = splittedString[splittedString.length - 1];
                                 Date timeMoment = new Date(Long.parseLong(splittedString[9]));
                                 resultLogs = new ResultLogs();
@@ -92,7 +88,7 @@ public class SearchResultManager implements Serializable{
                                 resultLogs.setTimeMoment(timeMoment);
                                 searchInfoResult.addResultLogs(resultLogs);
                             }
-                            correctStringList = new ArrayList<>();
+                            correctLogsList = new ArrayList<>();
                         } catch (IOException e) {
                             e.printStackTrace();
                         }

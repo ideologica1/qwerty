@@ -29,7 +29,7 @@ public class DataBaseManager implements Serializable {
         connection.close();
     }
 
-    public void recordCreatedFile(SearchInfo searchInfo, String name) throws SQLException {
+    protected void recordCreatedFile(SearchInfo searchInfo, String name) throws SQLException {
         setConnection();
         String addFileQuery = "INSERT INTO createdfiles"
                 + "(FileName, Extension, RegularExpression, Location) VALUES "
@@ -56,7 +56,7 @@ public class DataBaseManager implements Serializable {
 
     }
 
-    public void removeCreatedFile(String fileName) throws SQLException {
+    protected void removeCreatedFile(String fileName) throws SQLException {
         setConnection();
         String removeOutdatedFileQuery = "DELETE FROM dateintervals "
                 + "WHERE FileName = ?";
@@ -72,7 +72,7 @@ public class DataBaseManager implements Serializable {
         closeConnection();
     }
 
-    public List<String> getFilteredExistingFiles(SearchInfo searchInfo) throws SQLException {
+    protected List<String> getFilteredExistingFiles(SearchInfo searchInfo) throws SQLException {
         setConnection();
         List<String> filesName = new ArrayList<>();
         String location = searchInfo.getLocation();
@@ -92,7 +92,7 @@ public class DataBaseManager implements Serializable {
         return filesName;
     }
 
-    public List<SignificantDateInterval> getDateIntervals(String fileName) throws SQLException, ParseException {
+    protected List<SignificantDateInterval> getDateIntervals(String fileName) throws SQLException, ParseException {
         setConnection();
 
         List<SignificantDateInterval> existingFilesDateIntervals = new ArrayList<>();

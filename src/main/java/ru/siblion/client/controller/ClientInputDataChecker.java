@@ -90,10 +90,10 @@ public class ClientInputDataChecker {
 
     }
 
-    private Errors searchMaxErrorCode(List<Errors> list) {
-        if (!list.isEmpty()) {
-            list.sort(new ErrorsComparator());
-            return list.get(list.size() - 1);
+    private Errors searchMaxErrorCode(List<Errors> foundErrors) {
+        if (!foundErrors.isEmpty()) {
+            foundErrors.sort(new ErrorsComparator());
+            return foundErrors.get(foundErrors.size() - 1);
         }
         else return null;
     }

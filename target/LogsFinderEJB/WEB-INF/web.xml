@@ -49,5 +49,8 @@
     <security-role>
         <role-name>Administrators</role-name>
     </security-role>
+    <security-role>
+        <role-name>Siblioners</role-name>
+    </security-role>
 
 </web-app>

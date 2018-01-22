@@ -29,7 +29,7 @@ public class OutdatedFilesCleaner {
     @PostConstruct
     private void setCleaningTimer() {
         try {
-            PropertiesConfiguration conf = new PropertiesConfiguration("resources/application.properties");
+            PropertiesConfiguration conf = new PropertiesConfiguration("C:/Java/LogsFinderEJB/src/main/resources/application.properties");
             long intervalValueMs = (conf.getLong("CleaningIntervalInHours") * 3600000);
             Timer timer = timerService.createIntervalTimer(0, intervalValueMs, new TimerConfig());
         } catch (ConfigurationException ignored) {
@@ -41,19 +41,19 @@ public class OutdatedFilesCleaner {
     @Timeout
     public void cleanOutdatedFiles() {
         try {
-            PropertiesConfiguration conf = new PropertiesConfiguration("resources/application.properties");
+            PropertiesConfiguration conf = new PropertiesConfiguration("C:/Java/LogsFinderEJB/src/main/resources/application.properties");
             String filesDirectory = conf.getString("created_files");
             long availableLifeTime = (conf.getLong("AvailableLifeTimeInHours") * 3600000);
             String[] fileList = new File(filesDirectory).list();
             if (fileList != null) {
-                for (String aFileList : fileList) {
-                    System.out.println(aFileList);
-                    Path path = FileSystems.getDefault().getPath(filesDirectory + aFileList);
-                    BasicFileAttributes basicFileAttributes = Files.readAttributes(path, BasicFileAttributes.class);
+                for (String fileName : fileList) {
+                    System.out.println(fileName);
+                    Path filePath = FileSystems.getDefault().getPath(filesDirectory + fileName);
+                    BasicFileAttributes basicFileAttributes = Files.readAttributes(filePath, BasicFileAttributes.class);
                     long creationTime = basicFileAttributes.creationTime().toMillis();
                     if ((new Date().getTime() - creationTime > availableLifeTime)) {
-                        Files.delete(path);
-                        dataBaseManager.removeCreatedFile(aFileList);
+                        Files.delete(filePath);
+                        dataBaseManager.removeCreatedFile(fileName);
                         System.out.println(true);
                     } else System.out.println(false);
                 }

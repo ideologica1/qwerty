@@ -6,6 +6,8 @@ import ru.siblion.service.model.request.SearchInfo;
 import ru.siblion.service.model.response.LogSearchResult;
 import ru.siblion.service.model.response.SearchInfoResult;
 
+import javax.annotation.security.DeclareRoles;
+import javax.annotation.security.RolesAllowed;
 import javax.ejb.Stateless;
 import javax.inject.Inject;
 import javax.jws.WebMethod;
@@ -52,6 +54,8 @@ public class LogSearchWS {
 
     @WebMethod(exclude = true)
     private void generateFile(SearchInfo searchInfo) throws TransformerException, IOException, JAXBException, SQLException, SAXException, ConfigurationException {
+        String absolutePath = fileManager.generateFileAbsolutePath(searchInfo.getFileExtention());
+        fileManager.setFileAbsolutePath(absolutePath);
         fileManager.generateFile(searchInfo);
     }
 }

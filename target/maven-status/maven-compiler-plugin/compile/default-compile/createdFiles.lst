@@ -4,6 +4,7 @@ ru\siblion\client\soap\ConfigurationException_Exception.class
 ru\siblion\client\soap\SQLException_Exception.class
 ru\siblion\service\model\response\ResultLogs.class
 ru\siblion\client\soap\JAXBException_Exception.class
+ru\siblion\client\controller\SearchInfoService.class
 ru\siblion\client\soap\TransformerException_Exception.class
 ru\siblion\client\soap\package-info.class
 ru\siblion\client\soap\LogSearchAsyncResponse.class
@@ -33,18 +34,15 @@ ru\siblion\client\soap\SearchInfo.class
 ru\siblion\client\soap\IOException_Exception.class
 ru\siblion\client\soap\LogSearchSync.class
 ru\siblion\CurrentList.class
-ru\siblion\service\controller\SearchInfoService.class
 ru\siblion\client\soap\SignificantDateInterval.class
 ru\siblion\client\view\ResultRepresentation.class
-ru\siblion\util\XMLModel.class
+ru\siblion\service\model\XMLModel.class
 ru\siblion\client\soap\ParseException_Exception.class
 ru\siblion\client\soap\LogSearchAsync.class
 ru\siblion\service\model\request\SearchInfo.class
 ru\siblion\client\soap\SQLException.class
 ru\siblion\service\model\response\CorrectionCheckResult.class
-ru\siblion\service\soap\LogSearchWSService.class
 ru\siblion\service\model\request\SignificantDateInterval.class
-ru\siblion\service\soap\LogSearchWS.class
 ru\siblion\client\soap\ParseException.class
 ru\siblion\util\LogsComparator.class
 ru\siblion\util\Errors.class

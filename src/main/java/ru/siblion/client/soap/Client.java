@@ -3,7 +3,7 @@ package ru.siblion.client.soap;
 import org.apache.commons.configuration.ConfigurationException;
 import ru.siblion.client.controller.ClientInputDataChecker;
 import ru.siblion.client.view.ResultRepresentation;
-import ru.siblion.service.controller.SearchInfoService;
+import ru.siblion.client.controller.SearchInfoService;
 import ru.siblion.service.model.response.CorrectionCheckResult;
 
 import javax.enterprise.context.RequestScoped;

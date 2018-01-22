@@ -3,6 +3,7 @@
   <component name="ProjectModuleManager">
     <modules>
       <module fileurl="file://$PROJECT_DIR$/LogsFinderEJB.iml" filepath="$PROJECT_DIR$/LogsFinderEJB.iml" />
+      <module fileurl="file://$PROJECT_DIR$/clientside/clientside.iml" filepath="$PROJECT_DIR$/clientside/clientside.iml" />
     </modules>
   </component>
 </project>

@@ -7,8 +7,10 @@ import org.xml.sax.SAXException;
 import ru.siblion.service.model.request.SearchInfo;
 import ru.siblion.service.model.request.SignificantDateInterval;
 import ru.siblion.service.model.response.CorrectionCheckResult;
-import ru.siblion.util.XMLModel;
+import ru.siblion.service.model.XMLModel;
 
+import javax.ejb.Asynchronous;
+import javax.ejb.Stateless;
 import javax.enterprise.context.RequestScoped;
 import javax.inject.Inject;
 import javax.xml.bind.JAXBContext;
@@ -25,7 +27,7 @@ import java.util.Date;
 import java.util.List;
 
 
-@RequestScoped
+@Stateless
 public class FileManager implements Serializable {
     @Inject
     private CorrectionCheckResult correctionCheckResult;
@@ -41,39 +43,44 @@ public class FileManager implements Serializable {
 
     private String fileAbsolutePath;
 
-    public void generateFile(SearchInfo searchInfo) throws JAXBException, ConfigurationException, TransformerException, IOException, SAXException, SQLException {
-        XMLModel.setSearchInfo(searchInfo);
-        XMLModel.setSearchInfoResult(searchResultManager.searchLogs(searchInfo));
-        String fileExtension = searchInfo.getFileExtention();
-        fileAbsolutePath = generateFileAbsolutePath(fileExtension);
-        String fileName = extractFileName(fileAbsolutePath);
-        dataBaseManager.recordCreatedFile(searchInfo, fileName);
-        if (correctionCheckResult.getErrorCode() == 0) {
-            switch (fileExtension) {
-                case "XML":
-                    generateXML(fileAbsolutePath, XMLModel);
-                    break;
-                case "PDF":
-                    generatePDF(fileAbsolutePath);
-                    break;
-                case "RTF":
-                    generateRTF(fileAbsolutePath);
-                    break;
-                case "LOG":
-                    generateLOG(fileAbsolutePath);
-                    break;
-                case "HTML":
-                    generateHTML(fileAbsolutePath);
-                    break;
-                case "DOC":
-                    generateDOC(fileAbsolutePath);
-                    break;
+    @Asynchronous
+    public void generateFile(SearchInfo searchInfo) {
+      try {
+          XMLModel.setSearchInfo(searchInfo);
+          XMLModel.setSearchInfoResult(searchResultManager.searchLogs(searchInfo));
+          String fileExtension = searchInfo.getFileExtention();
+          String fileName = extractFileName(fileAbsolutePath);
+          dataBaseManager.recordCreatedFile(searchInfo, fileName);
+          if (correctionCheckResult.getErrorCode() == 0) {
+              switch (fileExtension) {
+                  case "XML":
+                      generateXML(fileAbsolutePath, XMLModel);
+                      break;
+                  case "PDF":
+                      generatePDF(fileAbsolutePath);
+                      break;
+                  case "RTF":
+                      generateRTF(fileAbsolutePath);
+                      break;
+                  case "LOG":
+                      generateLOG(fileAbsolutePath);
+                      break;
+                  case "HTML":
+                      generateHTML(fileAbsolutePath);
+                      break;
+                  case "DOC":
+                      generateDOC(fileAbsolutePath);
+                      break;
 
-            }
-        }
+              }
+          }
+      }
+      catch (Exception e) {
+
+      }
     }
 
-    private String generateFileAbsolutePath(String extension) throws ConfigurationException {
+    public String generateFileAbsolutePath(String extension) throws ConfigurationException {
         PropertiesConfiguration conf = new PropertiesConfiguration("C:/Java/LogsFinderEJB/src/main/resources/application.properties");
         return conf.getString("created_files") + "logs_" + new Date().getTime() + "." + extension.toLowerCase();
     }
@@ -85,7 +92,7 @@ public class FileManager implements Serializable {
 
     private ByteArrayOutputStream getXMLasStream(XMLModel xmlModel) throws JAXBException {
 
-        JAXBContext context = JAXBContext.newInstance(ru.siblion.util.XMLModel.class);
+        JAXBContext context = JAXBContext.newInstance(XMLModel.class);
         ByteArrayOutputStream out = new ByteArrayOutputStream();
         Marshaller marshaller = context.createMarshaller();
         marshaller.setProperty(Marshaller.JAXB_FORMATTED_OUTPUT, true);
@@ -96,7 +103,7 @@ public class FileManager implements Serializable {
 
     private void generateXML(String filePath, XMLModel xmlModel) throws JAXBException, ConfigurationException {
 
-        JAXBContext context = JAXBContext.newInstance(ru.siblion.util.XMLModel.class);
+        JAXBContext context = JAXBContext.newInstance(XMLModel.class);
         Marshaller marshaller = context.createMarshaller();
         marshaller.setProperty(Marshaller.JAXB_FORMATTED_OUTPUT, true);
         File file = new File(filePath);
@@ -240,6 +247,7 @@ public class FileManager implements Serializable {
         return fileAbsolutePath;
     }
 
+
     public boolean fileSearch(SearchInfo searchInfo) throws SQLException, ParseException {
 
         List<SignificantDateInterval> searchInfoDateIntervals = searchInfo.getDateInterval();
@@ -299,6 +307,10 @@ public class FileManager implements Serializable {
 
         float percetnageExceed = (float) sumOfItervalsResponse / sumOfItervalsRequest;
         return (percetnageExceed > 1.1);
+    }
+
+    public void setFileAbsolutePath(String absolutePath) {
+        this.fileAbsolutePath = absolutePath;
     }
 
 
