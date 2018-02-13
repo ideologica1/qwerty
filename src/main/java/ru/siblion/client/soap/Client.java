@@ -36,7 +36,7 @@ public class Client {
   @Inject
   private SearchInfoResult searchInfoResult;
 
-  public String getResponse() throws ConfigurationException, ConfigurationException_Exception, IOException_Exception, JAXBException_Exception, SQLException_Exception, TransformerException_Exception, ParseException_Exception, SAXException_Exception {
+  public String getResponse() {
     setDateIntervals();
     corectionCheck(searchInfo);
     if (isErrorOccured(correctionCheckResult)) {
@@ -56,20 +56,24 @@ public class Client {
     return null;
   }
 
-  private SearchInfoResult logSearchSync(SearchInfo searchInfo) throws ConfigurationException_Exception, IOException_Exception {
+  private SearchInfoResult logSearchSync(SearchInfo searchInfo) {
     LogSearchWS soap;
     soap = new LogSearchWSService().getLogSearchWSPort();
     return soap.logSearchSync(searchInfo);
   }
 
-  private LogSearchResult logSearchAsync(SearchInfo searchInfo) throws IOException_Exception, JAXBException_Exception, ParseException_Exception, SAXException_Exception, ConfigurationException_Exception, SQLException_Exception, TransformerException_Exception {
+  private LogSearchResult logSearchAsync(SearchInfo searchInfo) {
     LogSearchWS soap;
     soap = new LogSearchWSService().getLogSearchWSPort();
     return soap.logSearchAsync(searchInfo);
   }
 
-  private void corectionCheck(SearchInfo searchInfo) throws ConfigurationException {
-    clientInputDataChecker.correctionCheck(searchInfo);
+  private void corectionCheck(SearchInfo searchInfo) {
+    try {
+      clientInputDataChecker.correctionCheck(searchInfo);
+    } catch (ConfigurationException e) {
+      e.printStackTrace();
+    }
   }
 
   private boolean isErrorOccured(CorrectionCheckResult correctionCheckResult) {
@@ -95,5 +99,7 @@ public class Client {
   public void setSearchInfoResult(SearchInfoResult searchInfoResult) {
     this.searchInfoResult = searchInfoResult;
   }
+
+
 
 }

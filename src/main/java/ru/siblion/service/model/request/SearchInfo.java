@@ -1,6 +1,8 @@
 package ru.siblion.service.model.request;
 
 
+import ru.siblion.util.FileExtension;
+
 import javax.enterprise.context.RequestScoped;
 import javax.inject.Inject;
 import javax.inject.Named;
@@ -19,7 +21,7 @@ public class SearchInfo implements Serializable {
 
     private boolean realization;
 
-    private String fileExtention;
+    private FileExtension fileExtension;
 
     @Inject
     SignificantDateInterval significantDateInterval;
@@ -67,12 +69,12 @@ public class SearchInfo implements Serializable {
         this.realization = realization;
     }
 
-    public String getFileExtention() {
-        return fileExtention;
+    public FileExtension getFileExtension() {
+        return fileExtension;
     }
 
-    public void setFileExtention(String fileExtention) {
-        this.fileExtention = fileExtention;
+    public void setFileExtension(FileExtension fileExtension) {
+        this.fileExtension = fileExtension;
     }
 
 }

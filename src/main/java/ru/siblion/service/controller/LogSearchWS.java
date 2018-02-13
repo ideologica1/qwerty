@@ -6,8 +6,6 @@ import ru.siblion.service.model.request.SearchInfo;
 import ru.siblion.service.model.response.LogSearchResult;
 import ru.siblion.service.model.response.SearchInfoResult;
 
-import javax.annotation.security.DeclareRoles;
-import javax.annotation.security.RolesAllowed;
 import javax.ejb.Stateless;
 import javax.inject.Inject;
 import javax.jws.WebMethod;
@@ -29,7 +27,7 @@ public class LogSearchWS {
     private FileManager fileManager;
 
     @WebMethod
-    public LogSearchResult logSearchAsync(SearchInfo searchInfo) throws ParseException, TransformerException, IOException, JAXBException, SQLException, SAXException, ConfigurationException {
+    public LogSearchResult logSearchAsync(SearchInfo searchInfo) {
         LogSearchResult logSearchResult = new LogSearchResult();
         if (fileSearch(searchInfo)) {
             logSearchResult.setResponse(fileManager.getFileAbsolutePath());
@@ -43,18 +41,25 @@ public class LogSearchWS {
     }
 
     @WebMethod
-    public SearchInfoResult logSearchSync(SearchInfo searchInfo) throws IOException, ConfigurationException {
-        return searchResultManager.searchLogs(searchInfo);
+    public SearchInfoResult logSearchSync(SearchInfo searchInfo) {
+        try {
+            return searchResultManager.searchLogs(searchInfo);
+        } catch (ConfigurationException e) {
+            e.printStackTrace();
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+        return null;
     }
 
     @WebMethod(exclude = true)
-    private boolean fileSearch(SearchInfo searchInfo) throws SQLException, ParseException {
+    private boolean fileSearch(SearchInfo searchInfo) {
         return fileManager.fileSearch(searchInfo);
     }
 
     @WebMethod(exclude = true)
-    private void generateFile(SearchInfo searchInfo) throws TransformerException, IOException, JAXBException, SQLException, SAXException, ConfigurationException {
-        String absolutePath = fileManager.generateFileAbsolutePath(searchInfo.getFileExtention());
+    private void generateFile(SearchInfo searchInfo) {
+        String absolutePath = fileManager.generateFileAbsolutePath(searchInfo.getFileExtension().toString());
         fileManager.setFileAbsolutePath(absolutePath);
         fileManager.generateFile(searchInfo);
     }

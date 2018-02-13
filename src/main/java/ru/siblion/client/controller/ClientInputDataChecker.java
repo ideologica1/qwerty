@@ -4,6 +4,7 @@ package ru.siblion.client.controller;
 
 import org.apache.commons.configuration.ConfigurationException;
 import org.apache.commons.configuration.PropertiesConfiguration;
+import ru.siblion.client.soap.FileExtension;
 import ru.siblion.client.soap.SearchInfo;
 import ru.siblion.client.soap.SignificantDateInterval;
 import ru.siblion.service.controller.LogSearchResultService;
@@ -30,18 +31,20 @@ public class ClientInputDataChecker {
     public void correctionCheck(SearchInfo searchInfo) throws ConfigurationException {
 
         String location = searchInfo.getLocation();
-        String fileExtension = searchInfo.getFileExtention();
+        FileExtension fileExtension = searchInfo.getFileExtension();
         List<SignificantDateInterval> significantDateIntervals = searchInfo.getDateInterval();
         List<Errors> errorsList = new ArrayList<>();
 
-        if (!isExtensionChosen(fileExtension))
-            errorsList.add(Errors.EXTENSION_ABSENCE);
+        if(searchInfo.isRealization()) {
+            if (!isExtensionChosen(fileExtension))
+                errorsList.add(Errors.EXTENSION_ABSENCE);
+        }
 
         if (!isFilePathValid(location)) {
             errorsList.add(Errors.LOGS_LOCATION);
         }
 
-        if (isMandatoryParamEmpty(fileExtension, location)) {
+        if (isMandatoryParamEmpty(location)) {
             errorsList.add(Errors.INPUT_PARAMETERS);
         }
 
@@ -84,9 +87,9 @@ public class ClientInputDataChecker {
         Errors validError = searchMaxErrorCode(errorsList);
         if (!(validError == null)) {
             correctionCheckResult.setErrorCode(validError.getErrorCode());
+            logSearchResultService.setLogSearchResultResponse(correctionCheckResult);
         }
         else correctionCheckResult.setErrorCode(0);
-        logSearchResultService.setLogSearchResultResponse(correctionCheckResult);
 
     }
 
@@ -111,8 +114,8 @@ public class ClientInputDataChecker {
         }
     }
 
-    private boolean isMandatoryParamEmpty(String fileExtension, String location) {
-        if (fileExtension == null || location == null)
+    private boolean isMandatoryParamEmpty(String location) {
+        if (location == null)
             return true;
         else return false;
 
@@ -144,7 +147,7 @@ public class ClientInputDataChecker {
         return dateFrom.after(new Date());
     }
 
-    private boolean isExtensionChosen(String extension) {
+    private boolean isExtensionChosen(FileExtension extension) {
 
         return extension != null;
 

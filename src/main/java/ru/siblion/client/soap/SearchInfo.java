@@ -1,12 +1,15 @@
 
 package ru.siblion.client.soap;
 
+import ru.siblion.client.soap.SignificantDateInterval;
+
 import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
 import javax.xml.bind.annotation.XmlAccessType;
 import javax.xml.bind.annotation.XmlAccessorType;
 import javax.xml.bind.annotation.XmlElement;
+import javax.xml.bind.annotation.XmlSchemaType;
 import javax.xml.bind.annotation.XmlType;
 
 
@@ -21,7 +24,7 @@ import javax.xml.bind.annotation.XmlType;
  *     &lt;restriction base="{http://www.w3.org/2001/XMLSchema}anyType">
  *       &lt;sequence>
  *         &lt;element name="dateInterval" type="{http://controller.service.siblion.ru/}significantDateInterval" maxOccurs="unbounded" minOccurs="0"/>
- *         &lt;element name="fileExtention" type="{http://www.w3.org/2001/XMLSchema}string" minOccurs="0"/>
+ *         &lt;element name="fileExtension" type="{http://controller.service.siblion.ru/}fileExtension" minOccurs="0"/>
  *         &lt;element name="location" type="{http://www.w3.org/2001/XMLSchema}string" minOccurs="0"/>
  *         &lt;element name="realization" type="{http://www.w3.org/2001/XMLSchema}boolean"/>
  *         &lt;element name="regularExpression" type="{http://www.w3.org/2001/XMLSchema}string" minOccurs="0"/>
@@ -37,7 +40,7 @@ import javax.xml.bind.annotation.XmlType;
 @XmlAccessorType(XmlAccessType.FIELD)
 @XmlType(name = "searchInfo", propOrder = {
     "dateInterval",
-    "fileExtention",
+    "fileExtension",
     "location",
     "realization",
     "regularExpression",
@@ -46,12 +49,13 @@ import javax.xml.bind.annotation.XmlType;
 public class SearchInfo implements Serializable {
 
     @XmlElement(nillable = true)
-    protected List<SignificantDateInterval> dateInterval;
-    protected String fileExtention;
+    protected List<ru.siblion.client.soap.SignificantDateInterval> dateInterval;
+    @XmlSchemaType(name = "string")
+    protected FileExtension fileExtension;
     protected String location;
     protected boolean realization;
     protected String regularExpression;
-    protected SignificantDateInterval significantDateInterval;
+    protected ru.siblion.client.soap.SignificantDateInterval significantDateInterval;
 
     /**
      * Gets the value of the dateInterval property.
@@ -71,43 +75,43 @@ public class SearchInfo implements Serializable {
      * 
      * <p>
      * Objects of the following type(s) are allowed in the list
-     * {@link SignificantDateInterval }
+     * {@link ru.siblion.client.soap.SignificantDateInterval }
      * 
      * 
      */
-    public List<SignificantDateInterval> getDateInterval() {
+    public List<ru.siblion.client.soap.SignificantDateInterval> getDateInterval() {
         if (dateInterval == null) {
-            dateInterval = new ArrayList<SignificantDateInterval>();
+            dateInterval = new ArrayList<ru.siblion.client.soap.SignificantDateInterval>();
         }
         return this.dateInterval;
     }
 
-    public void setDateInterval(List<SignificantDateInterval> significantDateIntervalList) {
-        this.dateInterval = significantDateIntervalList;
+    public void setDateInterval(List<SignificantDateInterval> dateInterval) {
+        this.dateInterval = dateInterval;
     }
 
     /**
-     * Gets the value of the fileExtention property.
+     * Gets the value of the fileExtension property.
      * 
      * @return
      *     possible object is
-     *     {@link String }
+     *     {@link FileExtension }
      *     
      */
-    public String getFileExtention() {
-        return fileExtention;
+    public FileExtension getFileExtension() {
+        return fileExtension;
     }
 
     /**
-     * Sets the value of the fileExtention property.
+     * Sets the value of the fileExtension property.
      * 
      * @param value
      *     allowed object is
-     *     {@link String }
+     *     {@link FileExtension }
      *     
      */
-    public void setFileExtention(String value) {
-        this.fileExtention = value;
+    public void setFileExtension(FileExtension value) {
+        this.fileExtension = value;
     }
 
     /**
@@ -179,10 +183,10 @@ public class SearchInfo implements Serializable {
      * 
      * @return
      *     possible object is
-     *     {@link SignificantDateInterval }
+     *     {@link ru.siblion.client.soap.SignificantDateInterval }
      *     
      */
-    public SignificantDateInterval getSignificantDateInterval() {
+    public ru.siblion.client.soap.SignificantDateInterval getSignificantDateInterval() {
         return significantDateInterval;
     }
 
@@ -191,7 +195,7 @@ public class SearchInfo implements Serializable {
      * 
      * @param value
      *     allowed object is
-     *     {@link SignificantDateInterval }
+     *     {@link ru.siblion.client.soap.SignificantDateInterval }
      *     
      */
     public void setSignificantDateInterval(SignificantDateInterval value) {

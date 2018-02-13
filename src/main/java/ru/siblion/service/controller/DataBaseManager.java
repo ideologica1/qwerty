@@ -16,7 +16,7 @@ import java.util.List;
 
 public class DataBaseManager implements Serializable {
 
-    @Resource(name = "mydb")
+    @Resource(name = "MyDataSource")
     private DataSource dataSource;
 
     private Connection connection;
@@ -36,7 +36,7 @@ public class DataBaseManager implements Serializable {
                 + "(?, ?, ?, ?)";
         PreparedStatement preparedStatement = connection.prepareStatement(addFileQuery);
         preparedStatement.setString(1, name);
-        preparedStatement.setString(2, searchInfo.getFileExtention());
+        preparedStatement.setString(2, searchInfo.getFileExtension().toString());
         preparedStatement.setString(3, searchInfo.getRegularExpression());
         preparedStatement.setString(4, searchInfo.getLocation());
         preparedStatement.execute();
@@ -77,7 +77,7 @@ public class DataBaseManager implements Serializable {
         List<String> filesName = new ArrayList<>();
         String location = searchInfo.getLocation();
         String regularExpression = searchInfo.getRegularExpression();
-        String fileExtension = searchInfo.getFileExtention();
+        String fileExtension = searchInfo.getFileExtension().toString();
         String getExistingFiles = "SELECT FileName FROM createdfiles "
                 +"WHERE RegularExpression = ? AND Location = ? AND Extension = ? ";
         PreparedStatement preparedStatement = connection.prepareStatement(getExistingFiles);

@@ -8,10 +8,10 @@ import ru.siblion.service.model.request.SearchInfo;
 import ru.siblion.service.model.request.SignificantDateInterval;
 import ru.siblion.service.model.response.CorrectionCheckResult;
 import ru.siblion.service.model.XMLModel;
+import ru.siblion.util.FileExtension;
 
 import javax.ejb.Asynchronous;
 import javax.ejb.Stateless;
-import javax.enterprise.context.RequestScoped;
 import javax.inject.Inject;
 import javax.xml.bind.JAXBContext;
 import javax.xml.bind.JAXBException;
@@ -48,27 +48,27 @@ public class FileManager implements Serializable {
       try {
           XMLModel.setSearchInfo(searchInfo);
           XMLModel.setSearchInfoResult(searchResultManager.searchLogs(searchInfo));
-          String fileExtension = searchInfo.getFileExtention();
+          FileExtension fileExtension = searchInfo.getFileExtension();
           String fileName = extractFileName(fileAbsolutePath);
           dataBaseManager.recordCreatedFile(searchInfo, fileName);
           if (correctionCheckResult.getErrorCode() == 0) {
               switch (fileExtension) {
-                  case "XML":
+                  case XML:
                       generateXML(fileAbsolutePath, XMLModel);
                       break;
-                  case "PDF":
+                  case PDF:
                       generatePDF(fileAbsolutePath);
                       break;
-                  case "RTF":
+                  case RTF:
                       generateRTF(fileAbsolutePath);
                       break;
-                  case "LOG":
+                  case LOG:
                       generateLOG(fileAbsolutePath);
                       break;
-                  case "HTML":
+                  case HTML:
                       generateHTML(fileAbsolutePath);
                       break;
-                  case "DOC":
+                  case DOC:
                       generateDOC(fileAbsolutePath);
                       break;
 
@@ -80,9 +80,16 @@ public class FileManager implements Serializable {
       }
     }
 
-    public String generateFileAbsolutePath(String extension) throws ConfigurationException {
-        PropertiesConfiguration conf = new PropertiesConfiguration("C:/Java/LogsFinderEJB/src/main/resources/application.properties");
-        return conf.getString("created_files") + "logs_" + new Date().getTime() + "." + extension.toLowerCase();
+    public String generateFileAbsolutePath(String extension) {
+        try {
+            PropertiesConfiguration conf = new PropertiesConfiguration("C:/Java/LogsFinderEJB/src/main/resources/application.properties");
+            return conf.getString("created_files") + "logs_" + new Date().getTime() + "." + extension.toLowerCase();
+        }
+
+        catch (Exception e) {
+            e.printStackTrace();
+            return null;
+        }
     }
 
     private String extractFileName(String absolutePath) {
@@ -248,22 +255,29 @@ public class FileManager implements Serializable {
     }
 
 
-    public boolean fileSearch(SearchInfo searchInfo) throws SQLException, ParseException {
+    public boolean fileSearch(SearchInfo searchInfo)  {
 
-        List<SignificantDateInterval> searchInfoDateIntervals = searchInfo.getDateInterval();
-        List<String> filesName = dataBaseManager.getFilteredExistingFiles(searchInfo);
-        List<SignificantDateInterval> existingFilesDateIntervals;
+        try {
+            List<SignificantDateInterval> searchInfoDateIntervals = searchInfo.getDateInterval();
+            List<String> filesName = dataBaseManager.getFilteredExistingFiles(searchInfo);
+            List<SignificantDateInterval> existingFilesDateIntervals;
 
-        if (!filesName.isEmpty()) {
-            for (String fileName : filesName) {
-                existingFilesDateIntervals = dataBaseManager.getDateIntervals(fileName);
-                if (isIntervalsCovered(searchInfoDateIntervals, existingFilesDateIntervals) && !isCoveragePercentageExceed(searchInfoDateIntervals, existingFilesDateIntervals)) {
-                    fileAbsolutePath = fileName;
-                    return true;
+            if (!filesName.isEmpty()) {
+                for (String fileName : filesName) {
+                    existingFilesDateIntervals = dataBaseManager.getDateIntervals(fileName);
+                    if (isIntervalsCovered(searchInfoDateIntervals, existingFilesDateIntervals) && !isCoveragePercentageExceed(searchInfoDateIntervals, existingFilesDateIntervals)) {
+                        fileAbsolutePath = fileName;
+                        return true;
+                    }
                 }
-            }
+                return false;
+            } else return false;
+        }
+
+        catch (Exception e) {
+            e.printStackTrace();
             return false;
-        } else return false;
+        }
     }
 
 
